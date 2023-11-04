@@ -1,9 +1,41 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../utils/appSlice";
+import { GOOGLE_SEARCH_API } from "../utils/contansts";
+import { cacheResults } from "../utils/searchSlice";
 
 const Head = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const searchCache = useSelector((store) => store.search);
   const dispatch = useDispatch();
+
+  /**
+   *
+   */
+
+  //debouncing
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchCache[searchQuery]) {
+        setSuggestions(searchCache[searchQuery]);
+      } else {
+        getSuggestions();
+      }
+    }, 220);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  const getSuggestions = async () => {
+    const response = await fetch(GOOGLE_SEARCH_API + searchQuery);
+    const data = await response.json();
+    setSuggestions(data[1]);
+    dispatch(cacheResults({ [searchQuery]: data[1] }));
+  };
+
   const toggleSidebarHandler = () => {
     dispatch(toggleSidebar());
   };
@@ -23,15 +55,30 @@ const Head = () => {
           src="https://www.gstatic.com/youtube/img/branding/youtubelogo/svg/youtubelogo.svg"
         ></img>
       </div>
-      <div className="flex col-span-10 px-10">
+      <div className="flex col-span-10 px-10 relative">
         <input
-          className="w-1/2 border border-grey-400 p-1.5 rounded-l-full"
+          className="px-5 w-[30rem] border border-grey-400 p-1.5 rounded-l-full"
           type="text"
           placeholder="Search"
-        ></input>
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onFocus={() => setShowSuggestions(true)}
+          onBlur={() => setShowSuggestions(false)}
+        />
         <button className="border border-grey-400 py-1.5 px-4 rounded-r-full">
           🔍
         </button>
+        {showSuggestions && (
+          <div className="absolute bg-white top-10 left-10 px-4 w-[30rem] rounded-lg shadow-lg bg-gray-100">
+            <ul>
+              {suggestions.map((suggestion) => (
+                <li className="py-1  shadow-sm" key={suggestion}>
+                  🔍 {suggestion}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
       <div className="col-span-1">
         <img

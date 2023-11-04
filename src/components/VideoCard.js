@@ -39,10 +39,10 @@ const VideoCard = ({ info }) => {
         src={snippet.thumbnails.medium.url}
       />
       <div>
-        <p className="font-bold py-1">{title}</p>
-        <p>{channelTitle}</p>
+        <p className="font-extrabold py-1">{title}</p>
+        <p className="font-semibold">{channelTitle}</p>
         <div className="flex justify-between">
-          <p>{viewCount}</p>
+          <p>{viewCount} views</p>
           <p>{diffTimeText}</p>
         </div>
       </div>
