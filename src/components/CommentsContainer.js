@@ -153,7 +153,7 @@ const CommentList = ({ comments }) => {
 
 const CommentsContainer = () => {
   return (
-    <div className="p-2">
+    <div className="">
       <h1 className="text-2xl font-semibold">Comments</h1>
       <CommentList comments={commentData} />
     </div>
