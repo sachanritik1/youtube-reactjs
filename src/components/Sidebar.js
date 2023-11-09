@@ -10,27 +10,29 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="w-60 shadow-lg p-4">
-      <ul>
-        <li>Home</li>
-        <li>Shorts</li>
-        <li>Live</li>
-        <li>Trending</li>
-      </ul>
-      <h1 className="font-bold pt-3">Subscriptions</h1>
-      <ul>
-        <li>Music</li>
-        <li>coding</li>
-        <li>Gaming</li>
-        <li>Trending</li>
-      </ul>
-      <h1 className="font-bold pt-3">Watch Later</h1>
-      <ul>
-        <li>Music</li>
-        <li>Coding</li>
-        <li>Gaming</li>
-        <li>Trending</li>
-      </ul>
+    <div className="mr-48">
+      <div className="w-48 shadow-lg p-4 fixed top-16 bg-white h-full">
+        <ul>
+          <li>Home</li>
+          <li>Shorts</li>
+          <li>Live</li>
+          <li>Trending</li>
+        </ul>
+        <h1 className="font-bold pt-3">Subscriptions</h1>
+        <ul>
+          <li>Music</li>
+          <li>coding</li>
+          <li>Gaming</li>
+          <li>Trending</li>
+        </ul>
+        <h1 className="font-bold pt-3">Watch Later</h1>
+        <ul>
+          <li>Music</li>
+          <li>Coding</li>
+          <li>Gaming</li>
+          <li>Trending</li>
+        </ul>
+      </div>
     </div>
   );
 };

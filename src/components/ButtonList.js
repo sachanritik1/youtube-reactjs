@@ -18,14 +18,19 @@ const buttonList = [
   "Football",
   "Music",
   "Coding",
+  "jfnjsd",
+  "fdjnfjd",
+  "fdsnfk",
 ];
 
 const ButtonList = () => {
   return (
-    <div className="flex">
-      {buttonList.map((buttonName, index) => (
-        <Button key={index} name={buttonName} />
-      ))}
+    <div className="mb-10">
+      <div className="flex w-full overflow-x-auto fixed bg-white -z-10">
+        {buttonList.map((buttonName, index) => (
+          <Button key={index} name={buttonName} />
+        ))}
+      </div>
     </div>
   );
 };

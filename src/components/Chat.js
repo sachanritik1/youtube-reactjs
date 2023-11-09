@@ -11,7 +11,7 @@ const Chat = ({ name, text }) => {
 
       <div>
         <p className="font-bold">{name}</p>
-        <p>{text}</p>
+        <p>{text} 💪</p>
       </div>
     </div>
   );

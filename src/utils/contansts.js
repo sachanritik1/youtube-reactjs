@@ -5,4 +5,6 @@ const YOUTUBE_VIDEO_API = `https://youtube.googleapis.com/youtube/v3/videos?part
 const GOOGLE_SEARCH_API =
   "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
 
-export { YOUTUBE_VIDEO_API, GOOGLE_SEARCH_API };
+const YOUTUBE_SEARCH_VIDEOS_API = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key=${GOOGLE_API_KEY}&q=`;
+
+export { YOUTUBE_VIDEO_API, GOOGLE_SEARCH_API, YOUTUBE_SEARCH_VIDEOS_API };
