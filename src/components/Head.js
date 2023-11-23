@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../utils/appSlice";
 import { GOOGLE_SEARCH_API } from "../utils/contansts";
 import { cacheResults } from "../utils/searchSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -12,6 +12,7 @@ const Head = () => {
 
   const searchCache = useSelector((store) => store.search);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //debouncing
 
@@ -55,9 +56,13 @@ const Head = () => {
             ></img>
           </Link>
         </div>
-        <div
+        <form
           className="flex col-span-10 px-10 relative"
-          onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
+          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+          onSubmit={(e) => {
+            e.preventDefault();
+            navigate(`/search?suggestion=${searchQuery}`);
+          }}
         >
           <input
             className="px-5 w-[30rem] border border-grey-400 p-1.5 rounded-l-full"
@@ -67,16 +72,20 @@ const Head = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
           />
-          <button className="border border-grey-400 py-1.5 px-4 rounded-r-full">
+          <button
+            className="border border-grey-400 py-1.5 px-4 rounded-r-full"
+            type="submit"
+          >
             🔍
           </button>
           {showSuggestions && (
-            <div className="absolute bg-white top-10 left-10 px-4 w-[30rem] rounded-lg shadow-lg bg-gray-100 z-10 ">
+            <div className="absolute bg-white top-10 left-10 px-4 w-[30rem] rounded-lg shadow-lg bg-gray-100">
               <ul>
                 {suggestions.map((suggestion) => (
                   <Link
                     to={`/search?suggestion=${suggestion}`}
                     key={suggestion}
+                    onClick={() => setSearchQuery(suggestion)}
                   >
                     <li className="py-1  shadow-sm hover:bg-gray-100">
                       🔍 {suggestion}
@@ -86,7 +95,7 @@ const Head = () => {
               </ul>
             </div>
           )}
-        </div>
+        </form>
         <div className="col-span-1">
           <img
             className="h-8"

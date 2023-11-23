@@ -25,8 +25,8 @@ const buttonList = [
 
 const ButtonList = () => {
   return (
-    <div className="mb-10">
-      <div className="flex w-full overflow-x-auto fixed bg-white -z-10">
+    <div className="mb-12 bg-white">
+      <div className="flex overflow-x-auto fixed -z-10 bg-white">
         {buttonList.map((buttonName, index) => (
           <Button key={index} name={buttonName} />
         ))}

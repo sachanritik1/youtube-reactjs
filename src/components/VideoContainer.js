@@ -16,8 +16,20 @@ const VideoContainer = () => {
     setVideos(json.items);
   };
 
+  if (videos.length === 0)
+    return (
+      <div className="flex flex-wrap -z-50">
+        {Array.from({ length: 12 }).map((index) => (
+          <div
+            key={index}
+            className="m-2 w-72 h-72 bg-gray-100 rounded-xl border-spacing-2"
+          ></div>
+        ))}
+      </div>
+    );
+
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap -z-50 relative">
       {videos.map((video) => (
         <Link to={"/watch?v=" + video.id} key={video.id}>
           <VideoCard info={video} />
