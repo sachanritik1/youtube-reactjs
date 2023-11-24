@@ -10,7 +10,7 @@ const VideoCard = ({ video }) => {
   return (
     <Link
       to={"/watch?v=" + video.id}
-      className="p-2 m-2 w-72 h-72 bg-slate-100 rounded-xl"
+      className="p-1 m-2 w-72 h-72 bg-slate-100 rounded-xl"
     >
       <img
         className="rounded-lg"
