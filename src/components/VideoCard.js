@@ -1,15 +1,17 @@
 import React from "react";
 import { getDiffTimeText } from "../utils/helper";
+import { Link } from "react-router-dom";
 
-const VideoCard = ({ info }) => {
-  const { snippet, statistics } = info;
+const VideoCard = ({ video }) => {
+  const { snippet, statistics } = video;
   const { title, channelTitle, publishedAt } = snippet;
-  const { viewCount } = statistics;
-
   const diffTimeText = getDiffTimeText(publishedAt);
 
   return (
-    <div className="p-2 m-2 w-72 h-72 bg-slate-100 rounded-xl">
+    <Link
+      to={"/watch?v=" + video.id}
+      className="p-2 m-2 w-72 h-72 bg-slate-100 rounded-xl"
+    >
       <img
         className="rounded-lg"
         alt="thumbnail"
@@ -23,11 +25,11 @@ const VideoCard = ({ info }) => {
         </p>
         <p className="font-gray">{channelTitle}</p>
         <div className="flex justify-between">
-          <p>{viewCount} views</p>
+          <p>{statistics?.viewCount} views</p>
           <p>{diffTimeText}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

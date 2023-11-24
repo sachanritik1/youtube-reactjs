@@ -39,7 +39,7 @@ const Head = () => {
   };
   return (
     <div className="mb-16">
-      <div className="flex p-3 shadow-sm items-center justify-between fixed left-0 right-0 top-0 pb-4 bg-white">
+      <div className="flex p-3 shadow-sm items-center justify-between fixed left-0 right-0 top-0 pb-4 bg-white z-20">
         <div className="flex col-span-1">
           <img
             className="h-8 cursor-pointer"
