@@ -1,5 +1,5 @@
 import VideoCard from "./VideoCard";
-import VideoContainerShimmer from "../utils/VideoContainerShimmer";
+import VideoContainerShimmer from "../shimmer/VideoContainerShimmer";
 import { useSelector } from "react-redux";
 
 const VideoContainer = () => {
