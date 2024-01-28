@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import Head from "./Head";
 import { useNavigate } from "react-router-dom";
 
 const Body = () => {
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     async function fetchUser() {
@@ -22,13 +23,14 @@ const Body = () => {
         if (!data.success) {
           navigate("/signin");
         }
+        setUser(data.data);
       } catch (err) {
         console.log(err);
       }
     }
     fetchUser();
   }, []);
-  return (
+  return user ? (
     <div>
       <Head />
       <div className="flex">
@@ -36,6 +38,8 @@ const Body = () => {
         <Outlet />
       </div>
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 };
 
