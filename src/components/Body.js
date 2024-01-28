@@ -10,7 +10,12 @@ const Body = () => {
     async function fetchUser() {
       try {
         const response = await fetch(
-          process.env.REACT_APP_BASE_URL + "/users/me"
+          process.env.REACT_APP_BASE_URL + "/users/me",
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("accessToken"),
+            },
+          }
         );
         const data = await response.json();
         console.log(data);

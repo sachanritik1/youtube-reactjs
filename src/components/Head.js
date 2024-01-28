@@ -41,7 +41,12 @@ const Head = () => {
   const handleLogout = async () => {
     try {
       const response = await fetch(
-        process.env.REACT_APP_BASE_URL + "/users/logout"
+        process.env.REACT_APP_BASE_URL + "/users/logout",
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
       );
       const data = await response.json();
       console.log(data);

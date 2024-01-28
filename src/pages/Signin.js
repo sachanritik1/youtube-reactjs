@@ -21,17 +21,20 @@ const Signin = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },
         body: JSON.stringify({ username, password }),
       }
     );
 
     const json = await response.json();
-    console.log(json);
     if (json.error) {
       setError(json.error);
       return;
     }
+    localStorage.setItem("accessToken", json.data.accessToken);
+    localStorage.setItem("refreshToken", json.data.refreshToken);
+
     navigate("/");
   };
 
