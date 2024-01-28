@@ -51,6 +51,8 @@ const Head = () => {
       const data = await response.json();
       console.log(data);
       if (data.success) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
         navigate("/signin");
       }
     } catch (err) {
