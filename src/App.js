@@ -8,6 +8,7 @@ import WatchPage from "./components/WatchPage";
 import { SearchPage } from "./components/SearchPage";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
+import Error from "./pages/Error";
 
 const appRouter = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/signin",
     element: <Signin />,
+  },
+  {
+    path: "*",
+    element: <Error />,
   },
 ]);
 
