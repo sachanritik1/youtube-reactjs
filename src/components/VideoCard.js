@@ -8,10 +8,7 @@ const VideoCard = ({ video }) => {
   const diffTimeText = getDiffTimeText(publishedAt);
 
   return (
-    <Link
-      to={"/watch?v=" + video.id}
-      className="p-1 m-2 w-72 h-72 bg-slate-100 rounded-xl"
-    >
+    <Link to={"/watch?v=" + video.id} className="flex flex-col">
       <img
         className="rounded-lg"
         alt="thumbnail"
