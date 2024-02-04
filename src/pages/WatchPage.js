@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { closeSidebar } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
-import CommentsContainer from "./CommentsContainer";
-import LiveChatBox from "./LiveChatBox";
+import CommentsContainer from "../components/CommentsContainer";
+import LiveChatBox from "../components/LiveChatBox";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();

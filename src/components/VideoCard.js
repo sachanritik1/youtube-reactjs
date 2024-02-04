@@ -10,7 +10,7 @@ const VideoCard = ({ video }) => {
   return (
     <Link to={"/watch?v=" + video.id} className="flex flex-col">
       <img
-        className="rounded-lg"
+        className="rounded-lg object-contain"
         alt="thumbnail"
         src={snippet.thumbnails.medium.url}
       />

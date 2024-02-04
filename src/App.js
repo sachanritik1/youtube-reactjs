@@ -4,7 +4,7 @@ import Body from "./components/Body";
 import store from "./utils/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
-import WatchPage from "./components/WatchPage";
+import WatchPage from "./pages/WatchPage";
 import { SearchPage } from "./components/SearchPage";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
