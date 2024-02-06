@@ -63,7 +63,7 @@ const Head = () => {
   return (
     <div className="mb-16">
       <div className="flex p-3 shadow-sm items-center justify-between fixed left-0 right-0 top-0 pb-4 bg-white z-20">
-        <div className="flex col-span-1">
+        <div className="flex col-span-1 items-center">
           <img
             className="h-8 cursor-pointer"
             onClick={() => toggleSidebarHandler()}
@@ -72,11 +72,7 @@ const Head = () => {
           ></img>
 
           <Link to="/">
-            <img
-              className="h-8 mx-2"
-              alt="logo"
-              src="https://www.gstatic.com/youtube/img/branding/youtubelogo/svg/youtubelogo.svg"
-            ></img>
+            <p className="mx-2 font-bold text-3xl text-pink-600">VideoTube</p>
           </Link>
         </div>
         <form
