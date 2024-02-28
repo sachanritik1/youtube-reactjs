@@ -3,7 +3,6 @@ import ButtonList from "./ButtonList";
 import VideoContainer from "./VideoContainer";
 import { useDispatch } from "react-redux";
 import { openSidebar } from "../utils/appSlice";
-import { YOUTUBE_VIDEO_API } from "../utils/contansts";
 import { setVideos } from "../utils/videosSlice";
 
 const MainContainer = () => {
@@ -17,9 +16,14 @@ const MainContainer = () => {
   }, []);
 
   const getVideos = async () => {
-    const data = await fetch(YOUTUBE_VIDEO_API);
+    const data = await fetch(process.env.REACT_APP_BASE_URL + "/videos/", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
+    });
     const json = await data.json();
-    dispatch(setVideos(json.items));
+    dispatch(setVideos(json.data));
   };
 
   return (

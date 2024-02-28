@@ -28,10 +28,10 @@ const Head = () => {
   }, [searchQuery]);
 
   const getSuggestions = async () => {
-    const response = await fetch(GOOGLE_SEARCH_API + searchQuery);
-    const data = await response.json();
-    setSuggestions(data[1]);
-    dispatch(cacheResults({ [searchQuery]: data[1] }));
+    // const response = await fetch(GOOGLE_SEARCH_API + searchQuery);
+    // const data = await response.json();
+    // setSuggestions(data[1]);
+    // dispatch(cacheResults({ [searchQuery]: data[1] }));
   };
 
   const toggleSidebarHandler = () => {

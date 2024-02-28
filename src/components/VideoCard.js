@@ -3,16 +3,16 @@ import { getDiffTimeText } from "../utils/helper";
 import { Link } from "react-router-dom";
 
 const VideoCard = ({ video }) => {
-  const { snippet, statistics } = video;
-  const { title, channelTitle, publishedAt } = snippet;
-  const diffTimeText = getDiffTimeText(publishedAt);
+  const { title, thumbnail, owner, views } = video;
+
+  const diffTimeText = getDiffTimeText(video.createdAt);
 
   return (
-    <Link to={"/watch?v=" + video.id} className="flex flex-col">
+    <Link to={"/watch?v=" + video._id} className="flex flex-col">
       <img
         className="rounded-lg object-contain"
         alt="thumbnail"
-        src={snippet.thumbnails.medium.url}
+        src={thumbnail?.url}
       />
       <div>
         <p className="font-bold py-1">
@@ -20,9 +20,9 @@ const VideoCard = ({ video }) => {
             ? title
             : String(title).substring(0, 58) + "..."}
         </p>
-        <p className="font-gray">{channelTitle}</p>
+        <p className="font-gray">{owner?.username}</p>
         <div className="flex justify-between">
-          <p>{statistics?.viewCount} views</p>
+          <p>{views} views</p>
           <p>{diffTimeText}</p>
         </div>
       </div>
