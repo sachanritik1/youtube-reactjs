@@ -47,7 +47,7 @@ const Signup = () => {
       return;
     }
 
-    fetch(process.env.REACT_APP_BASE_URL + "/users/register", {
+    fetch(import.meta.env.VITE_API_URL + "/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

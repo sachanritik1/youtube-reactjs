@@ -16,7 +16,7 @@ const MainContainer = () => {
   }, []);
 
   const getVideos = async () => {
-    const data = await fetch(process.env.REACT_APP_BASE_URL + "/videos/", {
+    const data = await fetch(import.meta.env.VITE_API_URL + "/videos/", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("accessToken"),

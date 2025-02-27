@@ -7,7 +7,7 @@ const CreateComment = ({ videoId, parent, setComments }) => {
 
     try {
       const response = await fetch(
-        process.env.REACT_APP_BASE_URL + "/comments/" + videoId,
+        import.meta.env.VITE_API_URL + "/comments/" + videoId,
         {
           method: "POST",
           headers: {

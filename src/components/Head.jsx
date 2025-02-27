@@ -41,7 +41,7 @@ const Head = () => {
   const handleLogout = async () => {
     try {
       const response = await fetch(
-        process.env.REACT_APP_BASE_URL + "/users/logout",
+        import.meta.env.VITE_API_URL + "/users/logout",
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("accessToken"),

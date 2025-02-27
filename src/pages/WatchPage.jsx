@@ -16,7 +16,7 @@ const WatchPage = () => {
     async function fetchVideo() {
       try {
         const response = await fetch(
-          process.env.REACT_APP_BASE_URL + "/videos/" + videoId,
+          import.meta.env.VITE_API_URL + "/videos/" + videoId,
           {
             method: "GET",
             headers: {
@@ -38,7 +38,7 @@ const WatchPage = () => {
     async function fetchComments() {
       try {
         const response = await fetch(
-          process.env.REACT_APP_BASE_URL + "/comments/" + videoId,
+          import.meta.env.VITE_API_URL + "/comments/" + videoId,
           {
             method: "GET",
             headers: {

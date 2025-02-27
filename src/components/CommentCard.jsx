@@ -9,7 +9,7 @@ const CommentCard = ({ comment }) => {
   const [replyList, setReplyList] = useState([]);
   const getCommentReplies = async () => {
     const res = await fetch(
-      process.env.REACT_APP_BASE_URL + "/comments/reply/" + comment?._id,
+      import.meta.env.VITE_API_URL + "/comments/reply/" + comment?._id,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),

@@ -11,7 +11,7 @@ const Body = () => {
     async function fetchUser() {
       try {
         const response = await fetch(
-          process.env.REACT_APP_BASE_URL + "/users/me",
+          import.meta.env.VITE_API_URL + "/users/me",
 
           {
             method: "GET",
