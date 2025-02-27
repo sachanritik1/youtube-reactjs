@@ -3,6 +3,7 @@ import Sidebar from "./Sidebar";
 import { Navigate, Outlet } from "react-router-dom";
 import Head from "./Head";
 import { useNavigate } from "react-router-dom";
+import MainContainer from "./MainContainer";
 
 const Body = () => {
   const [user, setUser] = useState(null);
@@ -39,7 +40,7 @@ const Body = () => {
       </div>
     </div>
   ) : (
-    <div>Loading...</div>
+    <MainContainer />
   );
 };
 
