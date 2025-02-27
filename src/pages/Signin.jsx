@@ -16,7 +16,7 @@ const Signin = () => {
     const password = passwordRef.current.value;
 
     const response = await fetch(
-      process.env.REACT_APP_BASE_URL + "/users/login",
+      import.meta.env.VITE_API_URL + "/users/login",
       {
         method: "POST",
         headers: {
