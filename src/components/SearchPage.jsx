@@ -9,9 +9,17 @@ export const SearchPage = () => {
 
   const getSearchVideos = useCallback(
     async (suggestion) => {
-      const res = await fetch(YOUTUBE_SEARCH_VIDEOS_API + suggestion);
-      const json = await res.json();
-      setVideos(json.items);
+      const data = await fetch(
+        `${import.meta.env.VITE_API_URL}/videos?search=${suggestion}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
+      );
+      const json = await data.json();
+      setVideos(json.data);
     },
     [videos]
   );
@@ -27,21 +35,29 @@ export const SearchPage = () => {
   return (
     <div className="">
       {videos.map((video) => {
+        const { title, thumbnail, owner, views, diffTimeText } = video;
         return (
           <Link
-            to={"/watch?v=" + video.id.videoId}
-            key={video.id.videoId}
+            to={"/watch?v=" + video.id}
+            key={video.id}
             className="flex p-2 m-2 h-52 bg-slate-100 rounded-sm"
           >
-            <img alt="thumbnail" src={video.snippet.thumbnails.medium.url} />
-            <div className="flex flex-col ml-4">
-              <p className="text-lg font-semibold">{video.snippet.title}</p>
-              <div className="flex gap-10">
-                <p>{video?.snippet?.viewCount} views</p>
-                <p>{getDiffTimeText(video?.snippet?.publishedAt)}</p>
+            <img
+              className="rounded-lg object-contain"
+              alt="thumbnail"
+              src={thumbnail?.url}
+            />
+            <div>
+              <p className="font-bold py-1">
+                {String(title).length < 61
+                  ? title
+                  : String(title).substring(0, 58) + "..."}
+              </p>
+              <p className="font-gray">{owner?.username}</p>
+              <div className="flex justify-between">
+                <p>{views} views</p>
+                <p>{diffTimeText}</p>
               </div>
-              <p className="text-sm">✅ {video.snippet.channelTitle}</p>
-              <p className="text-sm">{video.snippet.description}</p>
             </div>
           </Link>
         );

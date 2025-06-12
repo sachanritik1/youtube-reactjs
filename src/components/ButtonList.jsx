@@ -33,9 +33,17 @@ const ButtonList = () => {
   const getVideos = async (suggestion) => {
     if (suggestion === "All") suggestion = "";
     setVideos([]);
-    const res = await fetch(YOUTUBE_SEARCH_VIDEOS_API + suggestion);
-    const json = await res.json();
-    dispatch(setVideos(json.items));
+    const data = await fetch(
+      `${import.meta.env.VITE_API_URL}/videos?search=${suggestion}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      }
+    );
+    const json = await data.json();
+    dispatch(setVideos(json.data));
   };
   return (
     <div className="mb-12 bg-white">
