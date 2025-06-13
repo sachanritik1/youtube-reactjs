@@ -192,9 +192,7 @@ const Head = () => {
 
               <Link to="/" className="flex items-center ml-1">
                 <img
-                  className={`h-6 ${
-                    theme === "dark" ? "brightness-0 invert" : ""
-                  }`}
+                  className={`h-6`}
                   alt="YouTube"
                   src="https://www.gstatic.com/youtube/img/branding/youtubelogo/svg/youtubelogo.svg"
                 />
