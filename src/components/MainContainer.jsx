@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ButtonList from "./ButtonList";
 import VideoContainer from "./VideoContainer";
 import { useDispatch } from "react-redux";

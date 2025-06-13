@@ -1,12 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Chat from "./Chat";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessage } from "../utils/chatSlice";
-import store from "../utils/store";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from "./ui/card";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { Send } from "lucide-react";
 
 const LiveChatBox = () => {
   const dispatch = useDispatch();
   const messages = useSelector((store) => store.chat.messages);
+  const [newMessage, setNewMessage] = useState("");
 
   function makeid(length) {
     let result = "";
@@ -211,32 +221,46 @@ const LiveChatBox = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    if (newMessage.trim() === "") return;
+
+    dispatch(
+      addMessage({
+        name: "You",
+        message: newMessage,
+      })
+    );
+
+    setNewMessage("");
+  };
+
   return (
-    <div className="mt-2 mr-2 p-2 border w-full h-[550px]">
-      <div className="flex flex-col-reverse overflow-y-scroll h-[500px]">
-        {messages.map((message, index) => {
-          return <Chat key={index} name={message.name} text={message.text} />;
-        })}
-      </div>
-      <form
-        className="mt-2"
-        onSubmit={(e) => {
-          e.preventDefault();
-          dispatch(
-            addMessage({ name: "Ritik Sachan", text: e.target[0].value })
-          );
-          e.target[0].value = "";
-        }}
-      >
-        <input
-          className="border w-3/4 mr-2 px-2"
-          placeholder="type something here..."
-        />
-        <button className="bg-slate-700 px-2 rounded-lg text-gray-400">
-          Send
-        </button>
-      </form>
-    </div>
+    <Card className="h-[600px] flex flex-col">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-lg">Live Chat</CardTitle>
+      </CardHeader>
+
+      <CardContent className="flex-1 overflow-y-auto space-y-2 p-4">
+        {messages.map((msg, index) => (
+          <Chat key={index} name={msg.name} message={msg.message} />
+        ))}
+      </CardContent>
+
+      <CardFooter className="border-t p-2">
+        <form onSubmit={handleSendMessage} className="flex w-full gap-2">
+          <Input
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="Type a message..."
+            className="flex-1"
+          />
+          <Button type="submit" size="sm">
+            <Send className="h-4 w-4" />
+          </Button>
+        </form>
+      </CardFooter>
+    </Card>
   );
 };
 

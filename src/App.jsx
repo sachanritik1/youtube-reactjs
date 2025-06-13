@@ -8,6 +8,7 @@ import { SearchPage } from "./components/SearchPage";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Error from "./pages/Error";
+import { ThemeProvider } from "./components/theme-provider";
 
 const appRouter = createBrowserRouter([
   {
@@ -44,9 +45,11 @@ const appRouter = createBrowserRouter([
 
 function App() {
   return (
-    <Provider store={store}>
-      <RouterProvider router={appRouter} />
-    </Provider>
+    <ThemeProvider defaultTheme="dark" storageKey="youtube-theme">
+      <Provider store={store}>
+        <RouterProvider router={appRouter} />
+      </Provider>
+    </ThemeProvider>
   );
 }
 
