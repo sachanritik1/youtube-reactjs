@@ -1,6 +1,6 @@
 export const getDiffTimeText = (publishedAt) => {
   const todayDate = new Date();
-  const publishedAtDate = new Date(publishedAt);
+  const publishedAtDate = new Date(parseInt(publishedAt, 10));
   const diffTime = Math.abs(todayDate - publishedAtDate);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));

@@ -1,4 +1,3 @@
-import React from "react";
 import { getDiffTimeText } from "../utils/helper";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardFooter } from "./ui/card";
@@ -6,9 +5,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Eye, Clock } from "lucide-react";
 
 const VideoCard = ({ video }) => {
-  const { title, thumbnail, owner, views } = video;
+  const { title, thumbnail, owner, views, createdAt } = video;
 
-  const diffTimeText = getDiffTimeText(video.createdAt);
+  const diffTimeText = getDiffTimeText(createdAt);
 
   return (
     <Link to={"/watch?v=" + video._id}>

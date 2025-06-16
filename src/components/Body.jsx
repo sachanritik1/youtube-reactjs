@@ -1,46 +1,25 @@
-import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import { Outlet, useNavigate } from "react-router-dom";
 import Head from "./Head";
 import { useTheme } from "./theme-provider";
+import { gql } from "@apollo/client";
+import useGetUser from "../hooks/use-get-user";
+
+const USER_QUERY = gql`
+  query FetchUser {
+    me {
+      email
+      fullName
+    }
+  }
+`;
 
 const Body = () => {
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const { loading, error } = useGetUser(USER_QUERY);
   const navigate = useNavigate();
   const { theme } = useTheme();
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await fetch(
-          import.meta.env.VITE_API_URL + "/users/me",
 
-          {
-            method: "GET",
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("accessToken"),
-            },
-          }
-        );
-        const data = await response.json();
-
-        if (!data.success) {
-          navigate("/signin");
-        } else {
-          setUser(data.data);
-        }
-      } catch (err) {
-        console.log(err);
-        navigate("/signin");
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchUser();
-  }, [navigate]);
-
-  if (isLoading) {
+  if (loading) {
     return (
       <div
         className={`flex items-center justify-center min-h-screen ${
@@ -55,7 +34,26 @@ const Body = () => {
     );
   }
 
-  return user ? (
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <p className="text-lg font-medium mb-2">Session expired</p>
+          <p className="text-sm text-muted-foreground mb-4">
+            Please sign in to continue
+          </p>
+          <button
+            onClick={() => navigate("/signin")}
+            className="px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
+          >
+            Sign in
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
     <div
       className={`min-h-screen ${
         theme === "dark" ? "bg-background text-foreground" : "bg-white"
@@ -67,21 +65,6 @@ const Body = () => {
         <main className="flex">
           <Outlet />
         </main>
-      </div>
-    </div>
-  ) : (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="text-center">
-        <p className="text-lg font-medium mb-2">Session expired</p>
-        <p className="text-sm text-muted-foreground mb-4">
-          Please sign in to continue
-        </p>
-        <button
-          onClick={() => navigate("/signin")}
-          className="px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
-        >
-          Sign in
-        </button>
       </div>
     </div>
   );
